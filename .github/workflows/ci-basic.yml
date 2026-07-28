@@ -1,0 +1,38 @@
+# ─────────────────────────────────────────────────────────────
+#  ci-basic.yml — THE STARTER PIPELINE (teaching aid, Session 3)
+#
+#  This is the *minimal* CI workflow described in the concept notes:
+#  checkout -> setup Python -> install deps -> lint -> test.
+#  It exists so learners can see the small version FIRST, then
+#  graduate to the full multi-job pipeline in ci-cd.yml.
+#
+#  It runs ONLY when triggered by hand (Actions tab -> Run workflow),
+#  so it never double-runs alongside the real pipeline on push/PR.
+# ─────────────────────────────────────────────────────────────
+name: CI (Basic – teaching starter)
+
+on:
+  workflow_dispatch: # adds a "Run workflow" button in the Actions tab
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint
+        run: flake8 app tests
+
+      - name: Run Tests
+        run: pytest
