@@ -62,3 +62,6 @@ async def health_check():
             "version": settings.VERSION,
         }
     )
+
+
+# Demo change for Pull Request workflow
