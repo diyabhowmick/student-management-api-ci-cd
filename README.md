@@ -479,3 +479,4 @@ Each test creates fresh tables and drops them after. This prevents test pollutio
 ## 📄 License
 
 MIT License — free to use for learning and portfolio projects.
+
